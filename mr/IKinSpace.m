@@ -1,3 +1,4 @@
+% HW2 Q2 T2
 function [thetalist, success] ...
          = IKinSpace(Slist, M, T, thetalist0, eomg, ev)
 % *** CHAPTER 6: INVERSE KINEMATICS ***
@@ -27,14 +28,10 @@ function [thetalist, success] ...
 % Example Inputs:
 % 
 % clear; clc;
-% Slist = [[0; 0;  1;  4; 0;    0], ...
-%        [0; 0;  0;  0; 1;    0], ...
-%        [0; 0; -1; -6; 0; -0.1]];
-% M = [[-1, 0, 0, 0]; [0, 1, 0, 6]; [0, 0, -1, 2]; [0, 0, 0, 1]];
-% T = [[0, 1, 0, -5]; [1, 0, 0, 4]; [0, 0, -1, 1.6858]; [0, 0, 0, 1]];
-% thetalist0 = [1.5; 2.5; 3];
-% eomg = 0.01;
-% ev = 0.001;
+
+
+% eomg = 0.0001;
+% ev = 0.00001;
 % [thetalist, success] = IKinSpace(Slist, M, T, thetalist0, eomg, ev)
 % 
 % Output:
@@ -47,7 +44,7 @@ function [thetalist, success] ...
 
 thetalist = thetalist0;
 i = 0;
-maxiterations = 20;
+maxiterations = 200;
 Tsb = FKinSpace(M, Slist, thetalist);
 Vs = Adjoint(Tsb) * se3ToVec(MatrixLog6(TransInv(Tsb) * T));
 err = norm(Vs(1: 3)) > eomg || norm(Vs(4: 6)) > ev;
